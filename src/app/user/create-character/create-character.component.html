@@ -1,0 +1,92 @@
+<div class="wrapper">
+    <div>
+        <app-title [title]="'Create Character'"></app-title>
+    </div>
+    <div class="create-wrapper" *ngIf="!showSaveBox">
+        <div class="w-100 alert" *ngIf="false">
+            alert
+        </div>
+        <form [formGroup]="chrForm">
+        <div class="name">
+            <label for="name">Character Name</label><br>
+            <input type="text" id="name" name="name" class="mt-1 w-100" formControlName="name">
+        </div>
+        <div class="mt-2">
+            <label for="gender">Gender</label><br>
+            <select id="gender" name="gender" class="mt-1 w-100 gender p-2" formControlName="gender">
+                <option value="male">male</option>
+                <option value="female">female</option>
+                <option value="sissy">sissy</option>
+                <option value="others">others</option>
+            </select>
+        </div>
+        <div class="d-flex gap-2 mt-2">
+            <div class="age w-50">
+                <label for="age">Age</label> <br>
+                <input type="number" id="age" name="age" class="mt-1 " formControlName="age">
+            </div>
+            <div class="play-style w-50">
+                <label for="play-style">Play style</label> <br>
+                <input type="text" id="play-style" name="play-style" class="mt-1" formControlName="playStyle">
+            </div>
+        </div>
+        <div class="d-flex gap-2 mt-2">
+            <div class="job w-50">
+                <label for="job">Profession</label> <br>
+                <input type="text" id="job" name="job" class="mt-1 " formControlName="job">
+            </div>
+            <div class="marital-status w-50">
+                <label for="marital-status">Marital Status</label> <br>
+                <input type="text" id="marital-status" name="marital-status" class="mt-1" formControlName="maritalStatus">
+            </div>
+        </div>
+        <div class="d-flex gap-2 mt-2">
+            <div class="about w-100">
+                <label for="about">About</label> <br>
+                <textarea id="about" name="about" class="mt-1 w-100" formControlName="about"></textarea>
+            </div>
+        </div>
+        <div class="d-flex gap-2 mt-2 w-100">
+            <div class="interests">
+                <label for="interests">Interests</label> <br>
+                <div class="d-flex align-items-center gap-1">
+                    <input id="interests" name="interests" class="mt-1 interests" [(ngModel)]="interestInput"
+                        [ngModelOptions]="{standalone: true}"
+                        [disabled]="interests.length === 5" />
+                    <span [ngClass]="{
+                        'add':interests.length < 5,
+                        'disable-add':interests.length === 5
+                    }" (click)="addInterest()">add</span>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="mt-2">
+            <app-chips [values]="interests"></app-chips>
+            <span *ngIf="interests.length <=0" class="gray">no interests added</span>
+        </div>
+
+        <div class="actions d-flex justify-content-center gap-4 mt-4">
+            <button type="button" class="cancel" (click)="cancel()">cancel</button>
+            <button type="button" class="save" (click)="save()">save</button>
+        </div>
+        </form>
+
+    </div>
+
+    <div class="save-box" *ngIf="showSaveBox">
+        <span class="material-symbols-outlined d-flex justify-content-end w-100 close" (click)="closeSaveBox()">
+            close
+        </span>
+        <div class="confirm-btns d-flex flex-column">
+            <span class="mb-2 text-center">Save character & Send to Admin for Approval ?</span>
+            <div class="btns d-flex gap-2">
+                <button class="save" (click)="confirmSave()">Proceed</button>
+                <button class="save-cancel" (click)="confirmCancel()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<app-tool-bar [showToolbar]="true" [icons]="['home','leaderboard','favorite','award_star','account_circle']">
+</app-tool-bar>

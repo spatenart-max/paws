@@ -1,0 +1,55 @@
+<div class="wrapper">
+    <div class="d-flex justify-content-between">
+        <app-title [title]="'Top players'"></app-title>
+    </div>
+
+    <div>
+        <!-- tabs.component.html -->
+        <div class="tabs">
+            <div *ngFor="let tab of rankingTabs" class="tab" [class.active]="selectedTab === tab"
+                (click)="selectedTab = tab">
+                {{ tab }}
+            </div>
+        </div>
+
+        <div class="tab-content">
+            <div class="tab-content">
+                <div *ngIf="selectedTab === 'Top rating'">
+                    <div *ngIf="topRatedRankingData.length > 0">
+                        <div class="rank-item-text d-flex justify-content-between mt-2">
+                            <span class="rank-text">Rank</span>
+                            <span class="rank-text">
+                                Player
+                            </span>
+                            <span class="rank-text">Rating</span>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+
+            <div class="tab-content-list">
+                <div *ngIf="selectedTab === 'Top rating'">
+                    <div *ngIf="topRatedRankingData.length > 0">
+                        <div class="rank-item d-flex justify-content-between mt-2"
+                            *ngFor="let user of topRatedRankingData; let i = index" [ngClass]="{'top-player': i === 0}">
+                            <span class="rank-number">{{ i + 1 }}</span>
+                            <span class="user-name ms-3 d-flex">
+                                <span *ngIf="i === 0" class="gold-badge" title="Top player">🏅</span>
+                                <h5>{{user.name}}</h5>
+                            </span>
+                            <span class=""><h5>{{user.avgRating || 0}}</h5></span>
+                        </div>
+                    </div>
+                    <div *ngIf="topRatedRankingData.length === 0" class="no-data gray">
+                        Loading...No active data
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <app-tool-bar [showToolbar]="true" [icons]="['home','leaderboard','favorite','award_star','account_circle']">
+    </app-tool-bar>

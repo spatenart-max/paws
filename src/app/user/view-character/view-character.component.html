@@ -1,0 +1,146 @@
+<div class="wrapper">
+    <div class="d-flex justify-content-between">
+        <app-title [title]="title"></app-title>
+    </div>
+
+    <div *ngIf="loadingCharacter && !acceptSuccess" class="loading-message text-center mt-5">
+        <p>Loading character details...</p>
+    </div>
+
+    <div *ngIf="loadError && !acceptSuccess" class="error-message text-center mt-5">
+        <p>{{loadError}}</p>
+    </div>
+
+    <div *ngIf="characterData && !acceptSuccess && !loadingCharacter ">
+        <div class="alert d-flex align-items-center mt-3" *ngIf="!(tabname === 'active' && characterData?.status === 'active')">
+            <span class="material-symbols-outlined info-icon">
+                info
+            </span>
+            <span class="alert-text ms-1" *ngIf="!isAdmin()">
+                Account : 
+                <span [ngClass]="characterData?.status == 'active' ? 'status-active' : 
+                                 characterData?.status == 'pending' ? 'status-pending' : 
+                                 'status-blocked'">
+                    {{characterData?.status == 'active' ? 'Active' : characterData?.status == 'pending' ? 'Need approval from admin' : 'Banned'}}</span>
+            </span>
+            <span class="alert-text ms-1" *ngIf="isAdmin()">
+                <span *ngIf="approving" class="status-active">
+                    approving character...
+                </span>
+                <span *ngIf="rejecting" class="status-blocked">
+                    rejecting character...
+                </span>
+            </span>
+        </div>
+        <div class="mt-2" *ngIf="characterData">
+            <div class="name-wrap d-flex align-items-center mb-3 justify-content-between">
+                <h3 class="mb-0">{{characterData.name}} - {{characterData.gender}}</h3>
+                <button class="review-btn ms-2" *ngIf="tabname?.toLowerCase() === 'active' && characterData?.status === 'active' && (likeId !== '' && likeId !== null && likeId !== undefined)" (click)="navigateToReview()">Review</button>
+            </div>
+
+            <div class="main-wrap">
+                <div class="stats-bar">
+                    <div class="stat-item">
+                        <div class="stat-value">
+                            {{ characterData.age }}
+                        </div>
+                        <div class="stat-label">
+                            Age
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">
+                            {{ characterData.job }}
+                        </div>
+                        <div class="stat-label">
+                            Profession
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">
+                            {{ characterData.maritalStatus }}
+                        </div>
+                        <div class="stat-label">
+                            Marital Status
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">
+                            {{ characterData.playStyle }}
+                        </div>
+                        <div class="stat-label">
+                            Play Style
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-section mt-3" *ngIf="characterData.about">
+                <h4>About</h4>
+                <p>{{characterData.about}}</p>
+            </div>
+
+            
+
+            <div class="interests-section mt-3">
+                <h4>Interests</h4>
+                <div class="d-flex flex-wrap gap-2">
+                    <span class="interest-chip" *ngFor="let interest of characterData.interests">{{interest}}c</span>
+                </div>
+            </div>
+            <div class="rate-section mt-3" >
+                <span class="rate-label">Rate:</span>
+                <span class="rate-chip">{{characterData.datePrice}}c</span>
+            </div>
+
+            <div class="admin-actions mt-3" *ngIf="isAdmin() && characterData?.status === 'pending'">
+                <button class="btn-approve" (click)="approve()">Approve</button>
+                <button class="btn-reject" (click)="reject()">Reject</button>
+            </div>
+
+            <div class="admin-actions mt-3" *ngIf="!isAdmin() && tabname.toLowerCase() === 'inbox'">
+                <button class="btn-approve" (click)="acceptLike()">Accept Play</button>
+                <button class="btn-reject" (click)="rejectLike()">Reject</button>
+            </div>
+
+            <div class="progress-container" *ngIf="isLoading || requestStatus">
+                <div class="progress-bar" *ngIf="isLoading">
+                    <div class="progress-fill"></div>
+                </div>
+                <span class="loading-text" *ngIf="isLoading">Processing...</span>
+                <span class="status-text" [class.success]="requestStatus.includes('successfully')" [class.error]="requestStatus.includes('Failed') || requestStatus.includes('not found')">{{requestStatus}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="acceptSuccess && tabname.toLowerCase() === 'inbox'" class="success-message mt-4">
+        <div class="text-center mb-4">
+            <div class="success-icon mb-3">
+                <span class="material-symbols-outlined" style="font-size: 48px; color: #21B76E;">check_circle</span>
+            </div>
+            <h4 class="mb-3">Play Accepted Successfully!</h4>
+            <p class="mb-2">Character: <strong>{{characterData?.name}}</strong></p>
+            <p class="mb-4">
+                FB Profile: 
+                <a [href]="characterData?.profileLink" target="_blank" class="fb-link">{{characterData?.profileLink}}</a>
+            </p>
+        </div>
+        <div class="steps">
+            <h5 class="mb-3">Next Steps:</h5>
+            <ol class="steps-list">
+                <li class="mb-2">Send a friend request to the user on Facebook.</li>
+                <li class="mb-2">
+                    Copy this message and send it to the user:
+                    <div class="message-box mt-2 p-2 border rounded">
+                        Hi dear, I liked your character: {{characterData?.name}}, Rate: {{characterData?.datePrice || 0}}, shall we continue
+                    </div>
+                    <button class="btn btn-sm btn-outline-primary mt-2" [class.copied]="copied" (click)="copyMessage()">{{ copied ? 'Copied!' : 'Copy Message' }}</button>
+                </li>
+                <li class="mb-2">After becoming friends, create a new group with the admin and roleplay in that group.</li>
+            </ol>
+        </div>
+        <div class="text-center mt-4">
+            <button class="btn btn-primary" (click)="goToMessages()">Go to Favorites</button>
+        </div>
+    </div>
+</div>

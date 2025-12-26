@@ -1,0 +1,102 @@
+.create-wrapper {
+
+    input,
+    textarea {
+        background-color: transparent;
+        border: 2px solid #4797FF;
+        padding: 10px 5px;
+        color: white;
+        width: 100%;
+        border-radius: 4px;
+    }
+
+    .gender{
+        border: 2px solid #4797FF;
+        color: white;
+        background-color: transparent;
+
+    }
+    .gender option {
+        background-color: #121212;
+        color: white;
+                padding: 1rem;
+
+        border-radius: 4px;
+
+    }
+}
+
+.add {
+    background-color: #4797FF;
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: black;
+}
+
+.disable-add {
+    border: 1px solid gray;
+    color: gray;
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+.gray {
+    color: gray;
+}
+
+button {
+    padding: 10px 30px;
+    border-radius: 8px;
+    color: white;
+}
+
+.save {
+    background-color: #00CB18 !important;
+}
+
+
+.cancel {
+    border: 2px solid gray;
+    background-color: transparent;
+    color: gray;
+}
+
+.save-box {
+    height: auto;
+    border: 1px solid #57ff7b;
+    border-radius: 8px;
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.confirm-btns {
+    display: flex;
+    justify-content: center;
+    margin-top: .5rem !important;
+
+    button {
+        padding: 10px 30px;
+        color: white;
+        border-radius: 4px;
+
+    }
+
+    .save-cancel {
+        background-color: transparent;
+        border: 1px solid gray;
+        color: gray;
+    }
+}
+
+.btns {
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper {
+    padding: 3rem 2rem;
+}

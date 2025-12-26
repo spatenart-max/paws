@@ -1,0 +1,65 @@
+/* tabs.component.css */
+.tabs {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 1rem;
+}
+
+.tab {
+  cursor: pointer;
+  position: relative;
+  font-weight: 100;
+}
+
+.tab.active {
+  color: #ff3366;
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: #ff3366;
+}
+
+.tab-content {
+  margin-top: 2rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.item img {
+  width: 45px;
+  height: 45px;
+  border-radius: 10%;
+  margin-right: 0.8rem;
+}
+
+.coins {
+  margin-left: auto;
+  color: #ccc;
+}
+.user-name{
+    font-weight: 100;
+}
+.gray {
+  color: gray;
+}
+.no-data {
+  text-align: center;
+  padding: 1rem;
+}
+.green-tick {
+          color: #21B76E;
+
+}
+.panel-bg-payment {
+    background-color: rgb(187, 255, 206);
+}

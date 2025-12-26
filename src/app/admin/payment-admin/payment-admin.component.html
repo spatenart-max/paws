@@ -1,0 +1,86 @@
+<div class="wrapper">
+  <div class="d-flex justify-content-between">
+    <app-title [title]="'Payments'"></app-title>
+  </div>
+
+  <div>
+    <!-- tabs.component.html -->
+    <div class="tabs">
+      <div *ngFor="let tab of paymentTabs" class="tab" [class.active]="selectedTab === tab" (click)="selectedTab = tab">
+        {{ tab }}
+      </div>
+    </div>
+
+    <div class="tab-content">
+      <div *ngIf="selectedTab === 'pending'">
+        <hr>
+        <div *ngIf="groupedReviews.length > 0">
+
+          <div class="mt-2" *ngFor="let review of groupedReviews">
+
+            <mat-accordion>
+              <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header class="panel-bg-payment">
+                  <mat-panel-title>
+                    <span class="">({{review[1].rating *100}})</span>
+                    {{review[0].fromUserName}} - {{review[0].toUserName}}
+                      <span class="">({{review[0].rating *100}})</span>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <p><b>Releasing payment</b></p>
+                <div class="mt-3">
+                  <div>Like ID :{{review[0].likeId}}</div>
+                  <div>{{review[1].rating *100}} credits to {{review[0].fromUserName}}</div>
+                  <div>{{review[0].rating *100}} credits to {{review[0].toUserName}}</div>
+                  <button class="btn-approve" (click)="releasePayment(review)">Release Payment</button>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+          <hr>
+        </div>
+        <div *ngIf="groupedReviews.length <= 0" class="no-data gray">
+          Loading...No active data
+        </div>
+      </div>
+
+    </div>
+    <div class="tab-content">
+      <div *ngIf="selectedTab === 'completed'">
+        <hr>
+        <div *ngIf="groupedCompletedReviews.length > 0">
+
+          <div class="mt-2" *ngFor="let review of groupedCompletedReviews">
+            <mat-accordion>
+              <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header class="panel-bg-payment">
+                  <mat-panel-title>
+                    <span class="material-symbols-outlined green-tick">
+                      select_check_box
+                    </span>
+                    <span class="">({{review[1].rating *100}})</span>
+                    {{review[0].fromUserName}} - {{review[0].toUserName}}
+                      <span class="">({{review[0].rating *100}})</span>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <p><b>Done payment</b></p>
+                <div class="mt-3">
+                  <div>Like ID :{{review[0].likeId}}</div>
+                  <div>{{review[1].rating *100}} credits to {{review[0].fromUserName}}</div>
+                  <div>{{review[0].rating *100}} credits to {{review[0].toUserName}}</div>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+          <hr>
+        </div>
+        <div *ngIf="groupedCompletedReviews.length <= 0" class="no-data gray">
+          Loading...No active data
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<app-tool-bar [showToolbar]="true" [icons]="['home','leaderboard','favorite','award_star','account_circle']">
+</app-tool-bar> 

@@ -1,0 +1,133 @@
+<div class="wrapper">
+    <div class="d-flex justify-content-between">
+        <app-title [title]="'Admin Dashboard'"></app-title>
+    </div>
+
+    <div class="content-wrapper mt-2">
+        <div class="alert d-flex align-items-center mt-3">
+            <span class="material-symbols-outlined info-icon">
+                info
+            </span>
+            <span class="alert-text ms-1">
+                You have pending work to review.
+            </span>
+        </div>
+        <span>Platform Summary</span>
+        <div class="main-wrap mt-2 mb-2">
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-value">
+                        <!-- {{ myProfile.wallet }} -->
+                        21
+                    </div>
+                    <div class="stat-label">
+                        Users
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">
+                        <!-- {{ myProfile.totalPlays }} -->
+                        43
+                    </div>
+                    <div class="stat-label">
+                        Characters
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">
+                        <!-- {{ myProfile.avgRating }} -->
+                        121
+                    </div>
+                    <div class="stat-label">
+                        Plays
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value coins-color">
+                        <!-- {{ myProfile.chrCount }} -->
+                        12.4K
+                    </div>
+                    <div class="stat-label">
+                        User Earnings
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span class="mb-2">Admin actions</span>
+
+        <div class="d-flex my-3 gap-3">
+            <div class="col-4 d-flex align-items-center flex-column  p-3 rounded dark-bg clickable-card" (click)="navigateToCreateUser()">
+                <span class="material-symbols-outlined user-add-icon mb-2">
+                    person_add
+                </span>
+                <span>New User</span>
+            </div>
+            <div class="col-8 d-flex align-items-center flex-column  p-3 rounded dark-bg clickable-card" (click)="navigateToManageUsers()">
+                <span class="material-symbols-outlined mb-2">
+                    manage_accounts
+                </span>
+                <span>Manage Users</span>
+            </div>
+
+        </div>
+        <div class="mt-2">
+            <mat-accordion>
+                <mat-expansion-panel hideToggle>
+                    <mat-expansion-panel-header class="panel-bg">
+                        <mat-panel-title> Delete all active Characters</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <p>Are you sure.</p>
+                    <div class="admin-actions mt-3">
+                        <button class="btn-reject" (click)="deleteAllActiveCharacters()">Delete</button>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+        <div class="mt-2">
+            <mat-accordion>
+                <mat-expansion-panel hideToggle>
+                    <mat-expansion-panel-header class="panel-bg">
+                        <mat-panel-title> Delete all pending Characters</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <p>Are you sure.</p>
+                    <div class="admin-actions mt-3">
+                        <button class="btn-reject" (click)="deleteAllPendingCharacters()">Delete</button>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+        <div class="mt-2">
+            <mat-accordion>
+                <mat-expansion-panel hideToggle>
+                    <mat-expansion-panel-header class="panel-bg">
+                        <mat-panel-title> Approve all pending Characters</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <p>Are you sure.</p>
+                    <div class="admin-actions mt-3">
+                        <button class="btn-approve" (click)="approveAllPendingCharacters()">Approve</button>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+        <div class="mt-2">
+            <mat-accordion>
+                <mat-expansion-panel hideToggle>
+                    <mat-expansion-panel-header class="panel-bg">
+                        <mat-panel-title> Delete all Likes</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <p>Are you sure.</p>
+                    <div class="admin-actions mt-3">
+                        <button class="btn-reject" (click)="deleteAllLikes()">Delete</button>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+        <div class="new-features-wrap">
+            <span>(new features soon)</span>
+        </div>
+    </div>
+
+
+</div>
+<app-tool-bar [showToolbar]="true" [icons]="['home','leaderboard','favorite','award_star','account_circle']">
+</app-tool-bar>

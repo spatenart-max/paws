@@ -1,0 +1,63 @@
+<div class="wrapper">
+    <div class="d-flex justify-content-between">
+        <app-title [title]="'My profile'"></app-title>
+    </div>
+
+    <div class="content-wrapper mt-2">
+        <div class="name-wrap">
+            <h3>{{myProfile.name}}</h3>
+        </div>
+
+        <div class="alert d-flex align-items-center mt-3">
+            <span class="material-symbols-outlined info-icon">
+                info
+            </span>
+            <span class="alert-text ms-1">
+                Account : <span [ngClass]="myProfile.isActive ? 'status-active' : 'status-blocked'">{{myProfile.isActive ? 'Active' : 'Blocked'}}</span>
+            </span>
+        </div>
+        <div class="main-wrap">
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-value">
+                        {{ myProfile.wallet }}
+                    </div>
+                    <div class="stat-label">
+                        Wallet
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">
+                        {{ myProfile.totalPlays }}
+                    </div>
+                    <div class="stat-label">
+                        Plays
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">
+                        {{ myProfile.avgRating }}
+                    </div>
+                    <div class="stat-label">
+                        Rating
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">
+                        -
+                    </div>
+                    <div class="stat-label">
+                        Characters
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="new-features-wrap">
+            <span>(new features soon)</span>
+        </div>
+    </div>
+
+
+</div>
+<app-tool-bar [showToolbar]="true" [icons]="['home','leaderboard','favorite','award_star','account_circle']">
+</app-tool-bar>

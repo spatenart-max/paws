@@ -1,0 +1,91 @@
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(1200px 600px at 10% 10%, rgba(236,72,153,0.08), transparent 10%),
+                            linear-gradient(180deg, #12000a 0%, #050003 100%);
+    padding: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+.title {
+    color: #ffd6ea;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+}
+
+.login-wrap {
+    width: 100%;
+    max-width: 420px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    border: 1px solid rgba(255,255,255,0.06);
+    backdrop-filter: blur(6px);
+    padding: 28px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+}
+
+.alert {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,230,241,0.04);
+    color: #ff9acb;
+    border: 1px solid rgba(255,112,172,0.12);
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.login {
+    background: transparent;
+    color: #e6eef8;
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+}
+
+.login::placeholder {
+    color: rgba(230,238,248,0.45);
+}
+
+.login-btn {
+    background: linear-gradient(90deg, #ff8fc3, #ff3b96);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.login-btn:active {
+    transform: translateY(1px) scale(0.998);
+}
+
+.login-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.foot {
+    color: rgba(255,255,255,0.6);
+    margin-top: 18px;
+    font-size: 13px;
+}
+
+@media (max-width: 480px) {
+    .login-wrap { padding: 18px; max-width: 100%; }
+    .title { font-size: 22px; }
+}

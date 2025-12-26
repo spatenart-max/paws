@@ -1,0 +1,17 @@
+<div class="wrapper">
+    <div class="d-flex justify-content-between">
+        <app-title [title]="'Characters'"></app-title>
+        <div class="create">
+            <span class="material-symbols-outlined add-icon" (click)="createNewChr()">
+                add_box
+            </span>
+        </div>
+
+    </div>
+    <div class="tabs-wrapper">
+        <app-tabs [activeData]="activeCharacters" [inboxData]="pendingCharacters" [bannedData]="bannedCharacters" [completedData]="completed" [tabs]="tabs"></app-tabs>
+    </div>
+    
+</div>
+<app-tool-bar [showToolbar]="true" [icons]="['home','leaderboard','favorite','award_star','account_circle']">
+</app-tool-bar>

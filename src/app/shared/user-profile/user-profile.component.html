@@ -1,0 +1,130 @@
+<div class="scroll-card">
+    <div class="hero">
+        <!-- <div class="user-pic-wrapper">
+            <img class="user-pic" [src]="activeProfile.imgUrl" alt="">
+        </div> -->
+
+        <div class="status-bar" *ngIf="userId">
+            <span class="me-2">
+                <app-back-button></app-back-button>
+            </span>
+
+            <span class="tab-wrap ms-2">
+                <span class="circle-icon" [ngClass]="{ 'green-dot' : tabname.toLowerCase()==='active' , 
+                                                        'blue-dot' : tabname.toLowerCase()==='inbox',
+                                                        'pink-dot' : tabname.toLowerCase()==='completed'}"></span>
+                <span class="tabName">{{tabname}}</span>
+
+            </span>
+            <span class="coins">{{activeProfile.rate}}cz</span>
+        </div>
+    </div>
+
+    <div class="confirm-box" *ngIf="showConfirmBox">
+        <span class="material-symbols-outlined d-flex justify-content-end w-100 close" 
+              (click)="closeConfirmBox()" 
+              [style.pointer-events]="isLoading || requestStatus ? 'none' : 'auto'"
+              [style.opacity]="isLoading || requestStatus ? '0.5' : '1'">
+            close
+        </span>
+        <!-- <span class="d-flex justify-content-end w-100 close">X</span> -->
+        <div class="confirm-btns d-flex flex-column">
+            <span class="mb-2 text-center">Request for</span>
+            <div class="btns d-flex" *ngIf="!isLoading">
+                <button class="date" (click)="onDateClick()">Date</button>
+                <button class="rp" (click)="onRolePlayClick()">RolePlay</button>
+            </div>
+            <div class="progress-container" *ngIf="isLoading || requestStatus">
+                <div class="progress-bar" *ngIf="isLoading">
+                    <div class="progress-fill"></div>
+                </div>
+                <span class="loading-text" *ngIf="isLoading">Sending request...</span>
+                <span class="status-text" [class.success]="requestStatus.includes('successfully')" [class.error]="requestStatus.includes('Failed')">{{requestStatus}}</span>
+            </div>
+        </div>
+
+    </div>
+    <div class="accept-box" *ngIf="showAcceptBox">
+        <span class="material-symbols-outlined d-flex justify-content-end w-100 close" (click)="closeAcceptBox()">
+            close
+        </span>
+        <div class="confirm-btns d-flex flex-column">
+            <span class="mb-2 text-center">Play accepted</span>
+            <div class="btns d-flex">
+                <button class="date">send Message</button>
+            </div>
+        </div>
+
+    </div>
+    <div class="reject-box" *ngIf="showRejectBox">
+        <span class="material-symbols-outlined d-flex justify-content-end w-100 close" (click)="closeRejectBox()">
+            close
+        </span>
+        <div class="confirm-btns d-flex flex-column">
+            <span class="mb-2 text-center">Are you sure to reject ?</span>
+            <div class="btns d-flex">
+                <button class="reject" (click)="confirmReject()">Reject</button>
+                <button class="reject-cancel" (click)="cancelReject()">Cancel</button>
+            </div>
+        </div>
+
+    </div>
+    <div class="details px-3" *ngIf="!showConfirmBox && !showAcceptBox && !showRejectBox">
+        <div class="basic">
+            <h4>{{activeProfile.name}} , {{activeProfile.age}} - {{activeProfile.gender}}</h4>
+            <div class="d-flex gap-2 mt-1">
+                <span class="grade">{{activeProfile.grade}}</span>
+                <span class="play-style">{{activeProfile.playStyle}} |</span>
+                <span class="job">{{activeProfile.job}} |</span>
+                <span class="marital-status">{{activeProfile.maritalStatus}}</span>
+            </div>
+        </div>
+        <div class="about mt-3">
+            <span class="heading">About</span>
+            <div class="about-text mt-1">
+                "{{activeProfile.about}}"
+            </div>
+        </div>
+        <div class="interests mt-3">
+            <app-chips [values]="activeProfile.interests" [heading]="'Interests'"></app-chips>
+        </div>
+        <div class="rate" *ngIf="!userId">
+            <span class="heading">Rate</span>
+            <div class="rate-value mt-1">{{activeProfile.rate}}</div>
+        </div>
+
+        <div class="action-btns" *ngIf="!userId">
+            <div class="reject-profile">
+                <button>
+                    <span class="material-symbols-outlined">
+                        close_small
+                    </span>
+                </button>
+            </div>
+            <div class="like">
+                <button (click)="likeProfile(activeProfile)">
+                    <span class="material-symbols-outlined">
+                        favorite
+                    </span>
+                </button>
+            </div>
+            <div class="fav">
+                <button>
+                    <span class="material-symbols-outlined">
+                        bookmark_heart
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <div class="feedback d-flex justify-content-center" *ngIf="userId && tabname.toLowerCase()==='active'">
+            <button class="Feedback" (click)="feedbackClick()">Feedback</button>
+        </div>
+        <div class="inbox-actions d-flex justify-content-center gap-4"
+            *ngIf="userId && tabname.toLowerCase()==='inbox'">
+            <button class="accept" (click)="acceptPlay()">Accept</button>
+            <button class="reject" (click)="rejectPlay()">Reject</button>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,89 @@
+<!-- tabs.component.html -->
+<div class="tabs">
+  <div *ngFor="let tab of tabs" class="tab" [class.active]="selectedTab === tab" (click)="selectedTab = tab">
+    {{ tab }}
+  </div>
+</div>
+
+<div class="tab-content" [@fadeIn]>
+  <div *ngIf="selectedTab === 'active'">
+    <hr>
+    <div *ngIf="activeData.length > 0">
+      <div class="item" *ngFor="let user of activeData" (click)="navigateToActive(user)">
+        <span class="material-symbols-outlined green-tick">
+          select_check_box
+        </span>
+        <span class="user-name ms-3">{{user.name}}</span>
+        <span class="coins">{{user.coins}}c</span>
+      </div>
+      <hr>
+    </div>
+    <div *ngIf="activeData.length === 0" class="no-data gray">
+      Loading...No active data
+    </div>
+  </div>
+
+  <div *ngIf="selectedTab === 'inbox'">
+    <div *ngIf="inboxData.length > 0">
+      <div class="item" *ngFor="let user of inboxData" (click)="navigateToInbox(user)">
+        <span class="material-symbols-rounded heart">
+          favorite
+        </span>
+        <span class="user-name">{{user.name}} ,
+          Reward: <span class="coins-color"><b>{{user.coins}}c</b></span>
+        </span>
+      </div>
+    </div>
+    <div *ngIf="inboxData.length === 0" class="no-data gray">
+      Nothing in inbox
+    </div>
+  </div>
+
+  <div *ngIf="selectedTab === 'banned'">
+    <div *ngIf="bannedData.length > 0">
+      <div class="item" *ngFor="let user of bannedData" (click)="navigateToBanned(user)">
+        <img [src]="user.image" alt="{{user.name}}" />
+        <span class="user-name">{{user.name}}</span>
+        <span class="coins">{{user.coins}}c</span>
+      </div>
+    </div>
+    <div *ngIf="bannedData.length === 0" class="no-data gray">
+      No banned data
+    </div>
+  </div>
+  <div *ngIf="selectedTab === 'pending'">
+    <div *ngIf="inboxData.length > 0">
+      <div class="item dark-bg" *ngFor="let user of inboxData" (click)="isAdmin && navigateToPendingAdmin(user)">
+        <span class="material-symbols-outlined me-2">
+          contacts
+        </span>
+        <span class="user-name">{{user.name}}</span>
+        <span class="coins">{{user.coins}}c</span>
+      </div>
+    </div>
+    <div *ngIf="inboxData.length === 0" class="no-data gray">
+      No pending data
+    </div>
+  </div>
+
+  <div *ngIf="selectedTab === 'Inbox'">
+    <div *ngIf="inboxData.length > 0">
+      <div class="item" *ngFor="let user of inboxData" (click)="navigateToInbox(user)">
+        <img [src]="user.image" alt="{{user.name}}" />
+        <span class="user-name">{{user.name}}</span>
+        <span class="coins">{{user.coins}}c</span>
+      </div>
+    </div>
+    <div *ngIf="inboxData.length === 0" class="no-data gray">
+      Nothing in inbox
+    </div>
+  </div>
+
+  <div *ngIf="selectedTab === 'Completed'">
+    <div class="item" *ngFor="let user of completedData" (click)="navigateToCompleted(user.id)">
+      <img [src]="user.image" alt="{{user.name}}" />
+      <span>{{user.name}}</span>
+      <span class="coins">{{user.coins}}c</span>
+    </div>
+  </div>
+</div>

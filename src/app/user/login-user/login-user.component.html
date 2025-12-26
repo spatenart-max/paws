@@ -1,0 +1,15 @@
+<div class="wrapper">
+    <div class="title">Paws roleplay community</div>
+    <div class="login-wrap w-75">
+        <div class="alert d-flex gap-2 align-items-center" *ngIf="showAlert">
+            <span class="material-symbols-outlined">
+                error
+            </span>
+            {{alertMessage}}
+        </div>
+
+        <input class="login" type="text" id="login" name="login" placeholder="Enter given ID" [(ngModel)]="id">
+        <button class="login-btn" (click)="login()">login</button>
+    </div>
+    <div class="foot">Virtual roleplay platform</div>
+</div>

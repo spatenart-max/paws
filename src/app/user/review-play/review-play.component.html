@@ -1,0 +1,40 @@
+<div class="wrapper">
+    <div class="d-flex justify-content-between">
+        <app-title [title]="'Review play'"></app-title>
+    </div>
+
+    <div class="mt-5rem">
+        <div class="text-center">
+            <span class="material-symbols-outlined feed-icon">
+                feedback
+            </span>
+            <div class="mt-2 text-center">
+                <h4>How was your roleplay date with character : <b>{{profile?.name}}</b>?</h4>
+                <p>Give feedback</p>
+            </div>
+        </div>
+        <div class="rating-section mt-4">
+            <div class="stars d-flex justify-content-center">
+                <span *ngFor="let i of [1,2,3,4,5]" class="star material-symbols-outlined" 
+                      [class.selected]="i <= rating" 
+                      (click)="setRating(i)">
+                    star
+                </span>
+            </div>
+            <p class="rating-display text-center mt-2">{{rating * 100}}/500</p>
+        </div>
+        <div class="text-center mt-4">
+            <button class="btn btn-success" (click)="submitReview()">Submit Review</button>
+        </div>
+        <div class="progress-container" *ngIf="isLoading || requestStatus">
+            <div class="progress-bar" *ngIf="isLoading">
+                <div class="progress-fill"></div>
+            </div>
+            <span class="loading-text" *ngIf="isLoading">Processing...</span>
+            <span class="status-text" [class.success]="requestStatus.includes('successfully')" [class.error]="requestStatus.includes('Failed') || requestStatus.includes('Please')">{{requestStatus}}</span>
+        </div>
+        <div>
+
+        </div>
+    </div>
+</div>

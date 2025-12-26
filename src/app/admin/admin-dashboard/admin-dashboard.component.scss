@@ -1,0 +1,15 @@
+.dark-bg{
+    background-color: #0d0d0d;
+}
+.user-add-icon{
+    color: #00CB18;
+}
+
+.clickable-card {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.clickable-card:hover {
+    background-color: #1a1a1a !important;
+}

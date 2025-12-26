@@ -1,0 +1,46 @@
+<!-- <div class="wrapper scroll-container #scrollContainer">
+    <app-user-profile *ngFor="let profile of profiles"></app-user-profile>
+
+</div> -->
+<div class="card-container wrapper">
+    <div class="d-flex justify-content-between">
+        <app-title [title]="'Feed'" [enableBackButton]="false"></app-title>
+    </div>
+    <div class="d-flex justify-content-between mb-2" *ngIf="myProfile">
+        <div class="gender-filter-wrapper mb-2">
+            <span (click)="openFilter()" class="material-symbols-outlined filter-icon">filter_list</span>
+
+            <div class="filter-popup" *ngIf="showFilterPopup">
+                <div class="filter-header">Filter by gender</div>
+                <div class="filter-options">
+                    <label><input type="radio" name="genderPopup" [checked]="tempSelectedGender==='male'"
+                            (change)="tempSelectedGender='male'"> male</label>
+                    <label><input type="radio" name="genderPopup" [checked]="tempSelectedGender==='female'"
+                            (change)="tempSelectedGender='female'"> female</label>
+                    <label><input type="radio" name="genderPopup" [checked]="tempSelectedGender==='other'"
+                            (change)="tempSelectedGender='other'"> other</label>
+                </div>
+                <div class="filter-actions">
+                    <button class="apply" (click)="applyFilter()">Apply</button>
+                    <button class="clear" (click)="clearFilter()">Clear</button>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex align-items-center">
+            <span class="material-symbols-outlined">
+                account_balance_wallet
+            </span>
+            <span class="ms-2 wallet-amount coins-color"> {{myProfile.wallet}} </span>
+        </div>
+
+    </div>
+
+    <app-user-profile [@cardAnimation] *ngIf="activeProfiles && activeProfiles.length > 0"
+        [activeProfile]="activeProfiles[currentIndex]" (disableScroll)="toggleScroll($event)">
+    </app-user-profile>
+    <div *ngIf="activeProfiles && activeProfiles.length === 0" class="no-characters-message">
+        <p>no characters for this account, contact admin</p>
+    </div>
+</div>
+<app-tool-bar [showToolbar]="true" [icons]="['home','leaderboard','favorite','award_star','account_circle']">
+</app-tool-bar>

@@ -1,0 +1,67 @@
+<div class="wrapper">
+    <div class="d-flex justify-content-between">
+        <app-title [title]="'Manage Users'"></app-title>
+    </div>
+
+    <div class="content-wrapper mt-2">
+        <!-- Custom Tabs -->
+        <div class="tabs-container">
+            <div class="tabs">
+                <div
+                    *ngFor="let tab of tabs"
+                    class="tab"
+                    [class.active]="selectedTab === tab"
+                    (click)="selectTab(tab)">
+                    {{ tab | titlecase }} Users
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div *ngIf="loading" class="loading-container">
+            <div class="loading-spinner">Loading users...</div>
+        </div>
+
+        <!-- Users Table -->
+        <div *ngIf="!loading" class="table-container">
+            <table class="users-table" *ngIf="getCurrentUsers().length > 0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Login ID</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of getCurrentUsers()">
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.loginId }}</td>
+                        <td>
+                            <span class="status-badge" [class.active]="user.isActive" [class.inactive]="!user.isActive">
+                                {{ user.isActive ? 'Active' : 'Inactive' }}
+                            </span>
+                        </td>
+                        <td class="actions-cell d-block">
+                            <span class="material-symbols-outlined action-icon delete-icon" (click)="deleteUser(user)" title="Delete User">delete</span>
+                            <span class="material-symbols-outlined action-icon toggle-icon" (click)="toggleUserStatus(user)" title="{{ user.isActive ? 'Deactivate User' : 'Activate User' }}">
+                                {{ user.isActive ? 'block' : 'check_circle' }}
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- No Users Message -->
+            <div *ngIf="getCurrentUsers().length === 0" class="no-users-message">
+                <div class="empty-state">
+                    <span class="material-symbols-outlined empty-icon">person_off</span>
+                    <h3>No {{ selectedTab }} users found</h3>
+                    <p>{{ selectedTab === 'active' ? 'There are no active users at the moment.' : 'There are no inactive users at the moment.' }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-tool-bar [showToolbar]="true" [icons]="['home','leaderboard','favorite','award_star','account_circle']">
+</app-tool-bar> 

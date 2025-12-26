@@ -1,0 +1,19 @@
+.chips-wrapper {
+    ul {
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+
+        li{
+            background-color: #ffbbcb;
+            color: black;
+            border-radius: 4px;
+            text-align: center;
+        }
+    }
+}
+.heading{
+    color: white;
+}

@@ -1,0 +1,35 @@
+<div class="wrapper">
+    <div>
+        <app-title [title]="'Create User'"></app-title>
+    </div>
+    <div class="create-wrapper">
+        <div class="w-100 alert" *ngIf="false">
+            alert
+        </div>
+        <form [formGroup]="userForm">
+            <div class="name">
+                <label for="loginId">Login ID</label><br>
+                <input type="text" id="loginId" name="loginId" class="mt-1 w-100" formControlName="loginId">
+            </div>
+            <div class="d-flex gap-2 mt-2">
+                <div class="name w-100">
+                    <label for="name">Name</label><br>
+                    <input type="text" id="name" name="name" class="mt-1 w-100" formControlName="name">
+                </div>
+            </div>
+            <div class="d-flex gap-2 mt-2">
+                <div class="name w-100">
+                    <label for="profileLink">FB Profile Link</label><br>
+                    <input type="url" id="profileLink" name="profileLink" class="mt-1 w-100" formControlName="profileLink">
+                </div>
+            </div>
+
+            <div class="actions d-flex justify-content-center gap-4 mt-4">
+                <button type="button" class="cancel" (click)="cancel()">Cancel</button>
+                <button type="button" class="save" (click)="onSubmit()">Create User</button>
+            </div>
+        </form>
+    </div>
+</div>
+<app-tool-bar [showToolbar]="true" [icons]="['home','leaderboard','favorite','award_star','account_circle']">
+</app-tool-bar> 

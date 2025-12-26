@@ -1,0 +1,7 @@
+<div *ngIf="showToolbar" class="toolbar">
+  <ul>
+    <li *ngFor="let icon of displayIcons" (click)="navigateTo(icon)">
+      <span class="material-symbols-outlined">{{ icon }}</span>
+    </li>
+  </ul>
+</div>
